@@ -42,6 +42,15 @@
    margin-bottom: 20px;
 
 }
+
+.sidebar .recent-entriesparent{
+    overflow-y: scroll;
+    height: 50vh;
+    max-height: 50vh;
+}
+.sidebar .recent-entriesparent::-webkit-scrollbar{
+    display: none;
+}
 .sidebar .recent-entry{
     display: flex;
     align-items:start;

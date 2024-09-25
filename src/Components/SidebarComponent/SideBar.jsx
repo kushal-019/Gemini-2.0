@@ -27,6 +27,7 @@ const SideBar = () => {
           extended ?
             <div className="recent">
               <p className="recent-title">Recent</p>
+              <div className='recent-entriesparent'>
               {
                 prevInputs.map((item , index)=>{
                   return (
@@ -38,6 +39,7 @@ const SideBar = () => {
                 })
               }
             </div>
+        </div>
             : null
         }
       </div>
