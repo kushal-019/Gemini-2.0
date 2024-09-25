@@ -19,16 +19,31 @@ const GeminiContextProvider = (props) => {
         } , 50*index);
     }
 
+    const newChat =()=>{
+        setPrevInputs([]);
+        setrecentInput("");
+        setloading(false);
+        setShowResult(false);
+    }
+
+
+
     const onSent = async (prompt) => {
 
         setresultData("");
         setloading(true);
         setShowResult(true);
-        setrecentInput(input);
+        let response = "";
+        if(prompt !== undefined){
+            setrecentInput(prompt);
+            response = await run(prompt);
+        }
+        else{
+            setrecentInput(input);
+            setPrevInputs(prev => [...prev , input]);
+            response = await run(input);
+        }
 
-        console.log("Generation Started");
-
-        const response = await run(input);
         let responseArray = response.split("**");
         let newResponse = "";
         for (let i = 0; i < responseArray.length; i++) {
@@ -46,17 +61,15 @@ const GeminiContextProvider = (props) => {
         for(let i=0;i<newResponse.length ; i++){
             delayPara(i , newResponse[i]+" ");
         }
-
-        // setresultData(newResponse);
+        
         setloading(false);
         setInput("");
-        console.log("Generation finished");
 
 
     }
 
     const ContextValue = {
-        input, setInput, recentInput, setrecentInput, prevInputs, setPrevInputs, loading, showResult, resultData, onSent,
+        input, setInput, recentInput, setrecentInput, prevInputs, setPrevInputs, loading, showResult, resultData, onSent,newChat,
     }
 
     return <GeminiContext.Provider value={ContextValue}>{props.children}</GeminiContext.Provider>

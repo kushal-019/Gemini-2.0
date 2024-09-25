@@ -5,8 +5,14 @@ import { GeminiContext } from '../../Context/context'
 
 const MainComp = () => {
 
-  const { input, setInput, recentInput, loading, showResult, resultData, onSent }
+  const { input, setInput, recentInput, loading, showResult, resultData, onSent ,setrecentInput ,setPrevInputs }
     = useContext(GeminiContext);
+
+    const searchSample=async(value)=>{
+      setPrevInputs(prev=>[...prev ,value ])
+      setrecentInput(value);
+      onSent(value);
+    }
 
   return (
     <div className='main'>
@@ -26,19 +32,19 @@ const MainComp = () => {
                 <p>How can I help you today?</p>
               </div>
               <div className="cards">
-                <div className="card">
+                <div onClick={()=>searchSample("Suggest some beautifull places to see on a upcoming road trip")} className="card" >
                   <p>Suggest some beautifull places to see on a upcoming road trip </p>
                   <img src={assets.compass_icon} alt="" />
                 </div>
-                <div className="card">
+                <div onClick={()=>searchSample("Briefly summarise this concept : Urban Planning")}  className="card" >
                   <p>Briefly summarise this concept : Urban Planning</p>
                   <img src={assets.bulb_icon} alt="" />
                 </div>
-                <div className="card">
+                <div className="card" onClick={()=>searchSample("Brainstrom team bonding activities for our work retreat")}>
                   <p>Brainstrom team bonding activities for our work retreat</p>
                   <img src={assets.message_icon} alt="" />
                 </div>
-                <div className="card">
+                <div onClick={()=>searchSample("improve the readability of the following code")} className="card">
                   <p>improve the readability of the following code </p>
                   <img src={assets.code_icon} alt="" />
                 </div>
@@ -69,7 +75,12 @@ const MainComp = () => {
             <div>
               <img src={assets.gallery_icon} alt="" />
               <img src={assets.mic_icon} alt="" />
-              <img src={assets.send_icon} onClick={() => onSent()} alt="" />
+              {
+                input ? 
+
+                <img src={assets.send_icon} onClick={() => onSent()} alt="" />
+                : null
+              }
             </div>
 
           </div>
