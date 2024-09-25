@@ -8,8 +8,6 @@ const MainComp = () => {
   const { input, setInput, recentInput, loading, showResult, resultData, onSent }
     = useContext(GeminiContext);
 
-
-
   return (
     <div className='main'>
       <div className="nav">
@@ -55,15 +53,15 @@ const MainComp = () => {
               <div className="result-data">
                 <img src={assets.gemini_icon} alt="" />
                 {
-                  loading ? <div classNade="loader"></div>
+                  loading ? <div className="loader">
+                    <hr/><hr/><hr/>
+                  </div>
                     : <p dangerouslySetInnerHTML={{ __html: resultData }}></p>
                 }
 
               </div>
             </div>
         }
-
-
 
         <div className="main-bottom">
           <div className="search-box">
